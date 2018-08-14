@@ -39,7 +39,7 @@ namespace DatingApp.API.Controllers {
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDTO userForUpdate)
+        public async Task<IActionResult> UpdateUser(int id, [FromBody]UserForUpdateDTO userForUpdate)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -50,7 +50,9 @@ namespace DatingApp.API.Controllers {
 
             if (await _repo.SaveAll()) return NoContent();
 
-            throw new Exception($"Updating user {id} failed on save");
+            var city = userForUpdate.City == null? "It's null" : userForUpdate.City;
+
+            throw new Exception($"Updating user {id} failed on save with data: City: {city} Country: {userForUpdate.Country} ");
         }
     }
 }
