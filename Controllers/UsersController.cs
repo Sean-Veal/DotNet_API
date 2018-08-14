@@ -50,9 +50,7 @@ namespace DatingApp.API.Controllers {
 
             if (await _repo.SaveAll()) return NoContent();
 
-            var city = userForUpdate.City == null? "It's null" : userForUpdate.City;
-
-            throw new Exception($"Updating user {id} failed on save with data: City: {city} Country: {userForUpdate.Country} ");
+            throw new Exception($"Updating user {id} failed on save ");
         }
     }
 }
