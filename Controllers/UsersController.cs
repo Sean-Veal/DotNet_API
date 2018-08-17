@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DatingApp.API.Controllers {
     [Authorize]
     [Route ("api/[controller]")]
+    [ApiController]
     public class UsersController : ControllerBase {
         private readonly IDatingRepository _repo;
         private readonly IMapper _mapper;
@@ -39,7 +40,7 @@ namespace DatingApp.API.Controllers {
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody]UserForUpdateDTO userForUpdate)
+        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDTO userForUpdate)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
