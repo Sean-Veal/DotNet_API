@@ -9,7 +9,7 @@ namespace DatingApp.API.Helpers
 {
     public class LogUserActivity : IAsyncActionFilter
     {
-        public async Task OnActionExecuteAsync(ActionExecutingContext context, ActionExecutionDelegate next) 
+     async Task IAsyncActionFilter.OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var resultsContext = await next();
 
